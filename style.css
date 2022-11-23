@@ -12,6 +12,7 @@
   --light-grey: #666;
   --off-white: #faf9f6;
   --primary-color: #e75e8d;
+  --secondary-color: #505BD2;
 }
 
 html {
@@ -23,6 +24,17 @@ body {
   background: var(--very-dark-grey);
   padding: 15px 50px;
   min-height: 100vh;
+}
+
+/* Utility Classes */
+
+.mobile {
+  display: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 header {
@@ -113,10 +125,6 @@ header > i {
   margin-left: 5px;
 }
 
-.mobile {
-  display: none;
-}
-
 main {
   background: var(--dark-grey);
   padding: 60px;
@@ -126,7 +134,8 @@ main {
 }
 
 #banner {
-  background: url("./assets/images/banner-bg.jpeg") center center/cover no-repeat;
+  background: url("./assets/images/banner-bg.jpeg") center center/cover
+    no-repeat;
   min-height: 380px;
   border-radius: 23px;
   padding: 80px 60px;
@@ -143,16 +152,16 @@ main {
   margin: 0 0 25px 0;
 }
 
-.banner__text h4 {
+.banner__text h2 {
   font-size: clamp(1.5rem, 9.5vw, 2.5rem);
-  line-height: clamp(2.5rem, 14vw , 3.5rem);
+  line-height: clamp(2.5rem, 14vw, 3.5rem);
   /* line-height: 55px; */
   text-transform: uppercase;
   color: var(--off-white);
   margin: 0 0 25px 0;
 }
 
-.banner__text h4 span {
+.banner__text h2 span {
   color: var(--primary-color);
 }
 
@@ -164,13 +173,82 @@ main {
   padding: 12px 27px;
   border-radius: 25px;
   cursor: pointer;
-  font-size: .9rem;
+  font-size: 0.9rem;
   transition: color 0.3s, background-color 0.3s;
 }
 
 .primary-btn:hover {
   background-color: var(--off-white);
   color: var(--primary-color);
+}
+
+#most-popular {
+  margin-top: 60px;
+  padding: 30px;
+  background-color: var(--very-dark-grey);
+  border-radius: 23px;
+}
+
+#most-popular > h3 {
+  color: var(--primary-color);
+  font-size: 34px;
+  margin-bottom: 30px;
+}
+
+#most-popular > h3 > span {
+  color: var(--off-white);
+  text-decoration: underline;
+}
+
+#game-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.game-item {
+  width: 23%;
+  border-radius: 23px;
+  background-color: var(--dark-grey);
+  padding: 30px 15px;
+}
+
+.game-item > img {
+  border-radius: 23px;
+}
+
+.game-content {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.game-title {
+  color: var(--off-white);
+}
+
+.game-publisher {
+  color: var(--light-grey);
+}
+
+.game-content-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--off-white);
+}
+
+.game-content-right > p {
+  cursor: pointer;
+}
+
+.game-wishlist {
+  color: var(--primary-color);
+}
+
+.game-played {
+  color: var(--secondary-color);
 }
 
 @media screen and (max-width: 1200px) {
