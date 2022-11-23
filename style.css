@@ -69,6 +69,13 @@ header {
   font-size: 16px;
 }
 
+header > i {
+  display: none;
+  font-weight: 900;
+  font-size: 25px;
+  color: var(--primary-color);
+}
+
 #header__right > ul {
   display: flex;
   align-items: center;
@@ -80,6 +87,10 @@ header {
 .nav-link {
   text-decoration: none;
   color: var(--light-grey);
+}
+
+.nav-link:hover {
+  color: var(--primary-color);
 }
 
 .nav-link.active-nav {
@@ -100,6 +111,10 @@ header {
   margin-left: 5px;
 }
 
+.mobile {
+  display: none;
+}
+
 @media screen and (max-width: 1200px) {
   body {
     padding: 15px 30px;
@@ -110,5 +125,51 @@ header {
   }
   #search-input {
     margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  header {
+    position: relative;
+  }
+  header > i {
+    display: inline;
+  }
+  .mobile {
+    display: unset;
+  }
+  #header__right {
+    position: absolute;
+    display: flex;
+    justify-content: end;
+    right: -30px;
+    top: -35px;
+    height: 102.8vh;
+    padding: 20px 0 0;
+    width: 0;
+    transition: 0.5s;
+    overflow: hidden;
+  }
+  #header__right > ul {
+    flex-direction: column;
+    row-gap: 10px;
+    background: var(--dark-grey);
+    width: 130px;
+    padding: 20px;
+  }
+  #header__right > ul > i {
+    color: var(--primary-color);
+    align-self: flex-end;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  #profile-tab {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #search-input {
+    display: none;
   }
 }
