@@ -14,10 +14,15 @@
   --primary-color: #e75e8d;
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   background: var(--very-dark-grey);
   padding: 15px 50px;
+  min-height: 100vh;
 }
 
 header {
@@ -34,9 +39,6 @@ header {
   display: flex;
   align-items: center;
 }
-
-/* #header__left {
-} */
 
 #logo {
   padding-right: 20%;
@@ -115,13 +117,69 @@ header > i {
   display: none;
 }
 
+main {
+  background: var(--dark-grey);
+  padding: 60px;
+  border-radius: 23px;
+  margin: 25px auto 0;
+  max-width: 1280px;
+}
+
+#banner {
+  background: url("./assets/images/banner-bg.jpeg") center center/cover no-repeat;
+  min-height: 380px;
+  border-radius: 23px;
+  padding: 80px 60px;
+}
+
+.banner__text {
+  width: 500px;
+}
+
+.banner__text h6 {
+  color: var(--off-white);
+  font-weight: 400;
+  font-size: 20px;
+  margin: 0 0 25px 0;
+}
+
+.banner__text h4 {
+  font-size: clamp(1.5rem, 9.5vw, 2.5rem);
+  line-height: clamp(2.5rem, 14vw , 3.5rem);
+  /* line-height: 55px; */
+  text-transform: uppercase;
+  color: var(--off-white);
+  margin: 0 0 25px 0;
+}
+
+.banner__text h4 span {
+  color: var(--primary-color);
+}
+
+.primary-btn {
+  background: var(--primary-color);
+  color: var(--off-white);
+  border: none;
+  outline: none;
+  padding: 12px 27px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: .9rem;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.primary-btn:hover {
+  background-color: var(--off-white);
+  color: var(--primary-color);
+}
+
 @media screen and (max-width: 1200px) {
-  body {
-    padding: 15px 30px;
-  }
   #logo {
     padding-right: 10%;
     border: none;
+  }
+  #header__right > ul {
+    column-gap: 20px;
   }
   #search-input {
     margin-left: 0;
@@ -166,10 +224,24 @@ header > i {
   #profile-tab {
     display: none;
   }
+
+  .banner__text {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 600px) {
   #search-input {
     display: none;
+  }
+  body {
+    padding: 15px 30px;
+  }
+  main {
+    padding: 0;
+  }
+  #banner {
+    padding: 40px;
+    text-align: center;
   }
 }
