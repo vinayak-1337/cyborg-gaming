@@ -136,7 +136,7 @@ main {
   width: 500px;
 }
 
-.banner__text h6 {
+.banner__text > p {
   color: var(--off-white);
   font-weight: 400;
   font-size: 20px;
