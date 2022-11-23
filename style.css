@@ -12,7 +12,7 @@
   --light-grey: #666;
   --off-white: #faf9f6;
   --primary-color: #e75e8d;
-  --secondary-color: #505BD2;
+  --secondary-color: #505bd2;
 }
 
 html {
@@ -126,7 +126,7 @@ header > i {
 }
 
 main {
-  background: var(--dark-grey);
+  background-color: var(--dark-grey);
   padding: 60px;
   border-radius: 23px;
   margin: 25px auto 0;
@@ -191,7 +191,7 @@ main {
 
 #most-popular > h3 {
   color: var(--primary-color);
-  font-size: 34px;
+  font-size: clamp(1.4rem, 6.9vw, 2rem);
   margin-bottom: 30px;
 }
 
@@ -204,11 +204,11 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .game-item {
-  width: 23%;
+  flex-basis: 260px;
   border-radius: 23px;
   background-color: var(--dark-grey);
   padding: 30px 15px;
@@ -255,6 +255,9 @@ main {
   #logo {
     padding-right: 10%;
     border: none;
+  }
+  main {
+    padding: 30px;
   }
   #header__right > ul {
     column-gap: 20px;
@@ -317,9 +320,17 @@ main {
   }
   main {
     padding: 0;
+    background-color: initial;
   }
   #banner {
     padding: 40px;
     text-align: center;
+  }
+  #most-popular {
+    margin-top: 30px;
+    padding: 0;
+  }
+  .game-item {
+    flex-basis: 100%;
   }
 }
