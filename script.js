@@ -25,7 +25,7 @@ async function fetchGamesData() {
       options
     );
     const data = await response.json();
-    addItemToList(data.results);
+    renderGameList(data.results);
   } catch (error) {
     console.log(error);
   }
