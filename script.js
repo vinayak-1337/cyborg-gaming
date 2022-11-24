@@ -25,7 +25,6 @@ async function fetchGamesData() {
       options
     );
     const data = await response.json();
-    console.log(data.results);
     addItemToList(data.results);
   } catch (error) {
     console.log(error);
@@ -33,7 +32,6 @@ async function fetchGamesData() {
 }
 
 function createElementWithClass(tagName, ...className) {
-  // console.log(...className);
   const element = document.createElement(tagName);
   if (typeof className === "string") {
     element.classList.add(className);
@@ -48,10 +46,8 @@ function createElementWithId(tagName, idName) {
   return element;
 }
 
-function addItemToList(data) {
+function renderGameList(data) {
   const gameData = data.slice(0, 8);
-
-  console.log("gameList", data);
 
   function gameCard({ name, background_image, genres }) {
     const gameItem = createElementWithClass("div", "game-item");
