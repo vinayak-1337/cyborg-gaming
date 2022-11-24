@@ -71,6 +71,17 @@ function renderGameList(data) {
       "fa-circle-check"
     );
 
+    gameWishlist.addEventListener("click", () => {
+      const icon = gameWishlist.children[0];
+      icon.classList.toggle("fa-regular");
+      icon.classList.toggle("fa-solid");
+    });
+    gamePlayed.addEventListener("click", () => {
+      const icon = gamePlayed.children[0];
+      icon.classList.toggle("fa-regular");
+      icon.classList.toggle("fa-solid");
+    });
+
     gameImg.setAttribute("src", background_image);
     gameTitle.innerText = name;
     gamePublisher.innerText = genres[0].name;
