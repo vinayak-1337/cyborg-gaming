@@ -3,8 +3,8 @@ const mobileNavClose = document.querySelector("#mobile-nav-close");
 const headerRight = document.querySelector("#header__right");
 const gameList = document.querySelector("#game-list");
 
-let localWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-let localPlayedGames = JSON.parse(localStorage.getItem("gamePlayed")) || [];
+let localWishlist = JSON.parse(sessionStorage.getItem("wishlist")) || [];
+let localPlayedGames = JSON.parse(sessionStorage.getItem("gamePlayed")) || [];
 
 mobileNavOpen.addEventListener("click", () => {
   headerRight.style.width = "130px";
@@ -91,7 +91,7 @@ function renderGameList(data) {
           });
         }
 
-        localStorage.setItem("wishlist", JSON.stringify(localWishlist));
+        sessionStorage.setItem("wishlist", JSON.stringify(localWishlist));
       } else {
         const game = {
           name,
@@ -99,7 +99,7 @@ function renderGameList(data) {
           genres,
         };
         localWishlist.push(game);
-        localStorage.setItem("wishlist", JSON.stringify(localWishlist));
+        sessionStorage.setItem("wishlist", JSON.stringify(localWishlist));
       }
     });
     gamePlayed.addEventListener("click", () => {
@@ -121,7 +121,7 @@ function renderGameList(data) {
           });
         }
 
-        localStorage.setItem("playedGames", JSON.stringify(localPlayedGames));
+        sessionStorage.setItem("playedGames", JSON.stringify(localPlayedGames));
       } else {
         const game = {
           name,
@@ -129,7 +129,7 @@ function renderGameList(data) {
           genres,
         };
         localPlayedGames.push(game);
-        localStorage.setItem("playedGames", JSON.stringify(localPlayedGames));
+        sessionStorage.setItem("playedGames", JSON.stringify(localPlayedGames));
       }
     });
 
