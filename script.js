@@ -11,6 +11,7 @@ let localWishlist = JSON.parse(sessionStorage.getItem("wishlist")) || [];
 let localPlayedGames = JSON.parse(sessionStorage.getItem("playedGames")) || [];
 
 let localWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+let localPlayedGames = JSON.parse(localStorage.getItem("gamePlayed")) || [];
 
 mobileNavOpen.addEventListener("click", () => {
   headerRight.style.transform = "scaleX(1)";
