@@ -3,6 +3,8 @@ const mobileNavClose = document.querySelector("#mobile-nav-close");
 const headerRight = document.querySelector("#header__right");
 const gameList = document.querySelector("#game-list");
 
+let localWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
 mobileNavOpen.addEventListener("click", () => {
   headerRight.style.width = "130px";
 });
@@ -73,6 +75,31 @@ function renderGameList(data) {
       const icon = gameWishlist.children[0];
       icon.classList.toggle("fa-regular");
       icon.classList.toggle("fa-solid");
+      if (localWishlist.length) {
+        // check if wishlist include game
+        if (Array.from(icon.classList).includes("fa-regular")) {
+          const newLocalWishlist = localWishlist.filter((item) => {
+            return item.name !== name;
+          });
+          localWishlist = [...newLocalWishlist];
+        } else {
+          localWishlist.push({
+            name,
+            background_image,
+            genres,
+          });
+        }
+
+        localStorage.setItem("wishlist", JSON.stringify(localWishlist));
+      } else {
+        const game = {
+          name,
+          background_image,
+          genres,
+        };
+        localWishlist.push(game);
+        localStorage.setItem("wishlist", JSON.stringify(localWishlist));
+      }
     });
     gamePlayed.addEventListener("click", () => {
       const icon = gamePlayed.children[0];
@@ -87,7 +114,6 @@ function renderGameList(data) {
     gameWishlist.append(wishlistIcon, " Wishlist");
     gamePlayed.append(playedIcon, " Played");
     gameContentRight.append(gameWishlist, gamePlayed);
-    // gameContent.append(gameContentLeft, gameContentRight);
 
     gameItem.append(gameImg, gameContentLeft, gameContentRight);
     gameList.append(gameItem);
