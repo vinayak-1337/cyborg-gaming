@@ -4,6 +4,7 @@ const headerRight = document.querySelector("#header__right");
 const gameList = document.querySelector("#game-list");
 
 let localWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+let localPlayedGames = JSON.parse(localStorage.getItem("gamePlayed")) || [];
 
 mobileNavOpen.addEventListener("click", () => {
   headerRight.style.width = "100%";
@@ -107,6 +108,31 @@ function renderGameList(data) {
       const icon = gamePlayed.children[0];
       icon.classList.toggle("fa-regular");
       icon.classList.toggle("fa-solid");
+      if (localPlayedGames.length) {
+        // check if game list include game
+        if (Array.from(icon.classList).includes("fa-regular")) {
+          const newLocalPlayedList = localPlayedGames.filter((item) => {
+            return item.name !== name;
+          });
+          localPlayedGames = [...newLocalPlayedList];
+        } else {
+          localPlayedGames.push({
+            name,
+            background_image,
+            genres,
+          });
+        }
+
+        localStorage.setItem("playedGames", JSON.stringify(localPlayedGames));
+      } else {
+        const game = {
+          name,
+          background_image,
+          genres,
+        };
+        localPlayedGames.push(game);
+        localStorage.setItem("playedGames", JSON.stringify(localPlayedGames));
+      }
     });
 
     gameImg.setAttribute("src", background_image);
