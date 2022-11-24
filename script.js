@@ -10,6 +10,8 @@ const gamingLibrary = document.querySelector("#game-played");
 let localWishlist = JSON.parse(sessionStorage.getItem("wishlist")) || [];
 let localPlayedGames = JSON.parse(sessionStorage.getItem("playedGames")) || [];
 
+let localWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
 mobileNavOpen.addEventListener("click", () => {
   headerRight.style.transform = "scaleX(1)";
   headerRight.style.transformOrigin = "left";
