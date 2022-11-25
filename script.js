@@ -2,6 +2,8 @@ const mobileNavOpen = document.querySelector("#mobile-nav-open");
 const mobileNavClose = document.querySelector("#mobile-nav-close");
 const headerRight = document.querySelector("#header__right");
 const gameList = document.querySelector("#game-list");
+const homeTab = document.querySelector("#home-tab");
+const profileTab = document.querySelector("#profile-tab");
 
 let localWishlist = JSON.parse(sessionStorage.getItem("wishlist")) || [];
 let localPlayedGames = JSON.parse(sessionStorage.getItem("gamePlayed")) || [];
@@ -15,6 +17,22 @@ mobileNavClose.addEventListener("click", () => {
   headerRight.style.width = "0";
   document.body.style.overflow = "auto";
 });
+
+function openPage(e, page) {
+  const pages = document.querySelectorAll(".page");
+  pages.forEach((page) => {
+    page.style.display = "none";
+  });
+  const tabs = document.querySelectorAll(".nav-link");
+  tabs.forEach((tab) => {
+    tab.className = tab.className.replace("active-nav", "");
+  });
+  document.getElementById(page).style.display = "block";
+  e.currentTarget.className += " active-nav";
+}
+
+homeTab.addEventListener("click", (e) => openPage(e, "home-page"));
+profileTab.addEventListener("click", (e) => openPage(e, "profile-page"));
 
 async function fetchGamesData() {
   const options = {

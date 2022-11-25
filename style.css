@@ -266,6 +266,10 @@ footer {
   padding: 20px 0;
 }
 
+#profile-page {
+  display: none;
+}
+
 @media screen and (max-width: 1200px) {
   #logo {
     padding-right: 10%;
