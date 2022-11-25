@@ -181,7 +181,7 @@ main {
   color: var(--primary-color);
 }
 
-#most-popular {
+section {
   margin-top: 60px;
   padding: 30px;
   background-color: var(--very-dark-grey);
