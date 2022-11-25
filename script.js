@@ -9,12 +9,14 @@ let localWishlist = JSON.parse(sessionStorage.getItem("wishlist")) || [];
 let localPlayedGames = JSON.parse(sessionStorage.getItem("gamePlayed")) || [];
 
 mobileNavOpen.addEventListener("click", () => {
-  headerRight.style.width = "100%";
+  headerRight.style.transform = "scaleX(1)";
+  headerRight.style.transformOrigin = "left";
   document.body.style.overflow = "hidden";
 });
 
 mobileNavClose.addEventListener("click", () => {
-  headerRight.style.width = "0";
+  headerRight.style.transform = "scaleX(0)";
+  headerRight.style.transformOrigin = "right";
   document.body.style.overflow = "auto";
 });
 
