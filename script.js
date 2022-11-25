@@ -20,6 +20,14 @@ mobileNavClose.addEventListener("click", () => {
   document.body.style.overflow = "auto";
 });
 
+if (window.innerWidth < 601) {
+  headerRight.addEventListener("click", () => {
+    headerRight.style.transform = "scaleX(0)";
+    headerRight.style.transformOrigin = "right";
+    document.body.style.overflow = "auto";
+  });
+}
+
 function openPage(e, page) {
   const pages = document.querySelectorAll(".page");
   pages.forEach((page) => {
