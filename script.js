@@ -7,11 +7,13 @@ let localWishlist = JSON.parse(sessionStorage.getItem("wishlist")) || [];
 let localPlayedGames = JSON.parse(sessionStorage.getItem("gamePlayed")) || [];
 
 mobileNavOpen.addEventListener("click", () => {
-  headerRight.style.width = "130px";
+  headerRight.style.width = "100%";
+  document.body.style.overflow = "hidden";
 });
 
 mobileNavClose.addEventListener("click", () => {
   headerRight.style.width = "0";
+  document.body.style.overflow = "auto";
 });
 
 async function fetchGamesData() {
