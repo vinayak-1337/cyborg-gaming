@@ -5,8 +5,10 @@ const gameList = document.querySelector("#game-list");
 const homeTab = document.querySelector("#home-tab");
 const profileTab = document.querySelector("#profile-tab");
 
-let localWishlist = JSON.parse(sessionStorage.getItem("wishlist")) || [];
-let localPlayedGames = JSON.parse(sessionStorage.getItem("gamePlayed")) || [];
+sessionStorage.setItem("wishlist", []);
+sessionStorage.setItem("gamePlayed", []);
+let localWishlist = [];
+let localPlayedGames = [];
 
 mobileNavOpen.addEventListener("click", () => {
   headerRight.style.transform = "scaleX(1)";
@@ -79,6 +81,14 @@ function createElementWithId(tagName, idName) {
   return element;
 }
 
+function updateWishlist() {
+  const wishlistCount = document.querySelector("#wishlist-count");
+  const gameCount = document.querySelector("#game-count");
+
+  wishlistCount.innerText = localWishlist.length;
+  gameCount.innerText = localPlayedGames.length;
+}
+
 function renderGameList(data) {
   const gameData = data.slice(0, 8);
 
@@ -120,8 +130,6 @@ function renderGameList(data) {
             genres,
           });
         }
-
-        sessionStorage.setItem("wishlist", JSON.stringify(localWishlist));
       } else {
         const game = {
           name,
@@ -129,8 +137,9 @@ function renderGameList(data) {
           genres,
         };
         localWishlist.push(game);
-        sessionStorage.setItem("wishlist", JSON.stringify(localWishlist));
       }
+      sessionStorage.setItem("wishlist", JSON.stringify(localWishlist));
+      updateWishlist();
     });
     gamePlayed.addEventListener("click", () => {
       const icon = gamePlayed.children[0];
@@ -150,8 +159,6 @@ function renderGameList(data) {
             genres,
           });
         }
-
-        sessionStorage.setItem("playedGames", JSON.stringify(localPlayedGames));
       } else {
         const game = {
           name,
@@ -159,8 +166,9 @@ function renderGameList(data) {
           genres,
         };
         localPlayedGames.push(game);
-        sessionStorage.setItem("playedGames", JSON.stringify(localPlayedGames));
       }
+      sessionStorage.setItem("playedGames", JSON.stringify(localPlayedGames));
+      updateWishlist();
     });
 
     gameImg.setAttribute("src", background_image);
