@@ -1,14 +1,13 @@
 const mobileNavOpen = document.querySelector("#mobile-nav-open");
 const mobileNavClose = document.querySelector("#mobile-nav-close");
 const headerRight = document.querySelector("#header__right");
-const gameList = document.querySelector("#game-list");
+const popularList = document.querySelector("#popular-list");
 const homeTab = document.querySelector("#home-tab");
 const profileTab = document.querySelector("#profile-tab");
+const wishlist = document.querySelector("#wishlist");
 
-sessionStorage.setItem("wishlist", []);
-sessionStorage.setItem("gamePlayed", []);
-let localWishlist = [];
-let localPlayedGames = [];
+let localWishlist = JSON.parse(sessionStorage.getItem("wishlist")) || [];
+let localPlayedGames = JSON.parse(sessionStorage.getItem("playedGames")) || [];
 
 mobileNavOpen.addEventListener("click", () => {
   headerRight.style.transform = "scaleX(1)";
@@ -44,7 +43,11 @@ function openPage(e, page) {
 }
 
 homeTab.addEventListener("click", (e) => openPage(e, "home-page"));
-profileTab.addEventListener("click", (e) => openPage(e, "profile-page"));
+profileTab.addEventListener("click", (e) => {
+  openPage(e, "profile-page");
+  wishlist.innerText = "";
+  renderGameList(localWishlist, wishlist);
+});
 
 async function fetchGamesData() {
   const options = {
@@ -60,7 +63,7 @@ async function fetchGamesData() {
       options
     );
     const data = await response.json();
-    renderGameList(data.results);
+    renderGameList(data.results, popularList);
   } catch (error) {
     console.log(error);
   }
@@ -89,7 +92,7 @@ function updateWishlist() {
   gameCount.innerText = localPlayedGames.length;
 }
 
-function renderGameList(data) {
+function renderGameList(data, listContainer) {
   const gameData = data.slice(0, 8);
 
   function gameCard({ name, background_image, genres }) {
@@ -104,13 +107,26 @@ function renderGameList(data) {
       "game-content-right"
     );
     const gameWishlist = createElementWithClass("p", "game-wishlist");
-    const wishlistIcon = createElementWithClass("i", "fa-regular", "fa-heart");
     const gamePlayed = createElementWithClass("p", "game-played");
-    const playedIcon = createElementWithClass(
-      "i",
-      "fa-regular",
-      "fa-circle-check"
-    );
+
+    const isFoundInWishlist = localWishlist.find((game) => {
+      return game.name === name;
+    });
+    let wishlistIcon;
+    if (isFoundInWishlist) {
+      wishlistIcon = createElementWithClass("i", "fa-solid", "fa-heart");
+    } else {
+      wishlistIcon = createElementWithClass("i", "fa-regular", "fa-heart");
+    }
+    const isFoundInPlayed = localPlayedGames.find((game) => {
+      return game.name === name;
+    });
+    let playedIcon;
+    if (isFoundInPlayed) {
+      playedIcon = createElementWithClass("i", "fa-solid", "fa-circle-check");
+    } else {
+      playedIcon = createElementWithClass("i", "fa-regular", "fa-circle-check");
+    }
 
     gameWishlist.addEventListener("click", () => {
       const icon = gameWishlist.children[0];
@@ -118,7 +134,10 @@ function renderGameList(data) {
       icon.classList.toggle("fa-solid");
       if (localWishlist.length) {
         // check if wishlist include game
-        if (Array.from(icon.classList).includes("fa-regular")) {
+        const isFoundInWishlist = localWishlist.find((game) => {
+          return game.name === name;
+        });
+        if (isFoundInWishlist) {
           const newLocalWishlist = localWishlist.filter((item) => {
             return item.name !== name;
           });
@@ -147,7 +166,10 @@ function renderGameList(data) {
       icon.classList.toggle("fa-solid");
       if (localPlayedGames.length) {
         // check if game list include game
-        if (Array.from(icon.classList).includes("fa-regular")) {
+        const isFoundInPlayed = localPlayedGames.find((game) => {
+          return game.name === name;
+        });
+        if (isFoundInPlayed) {
           const newLocalPlayedList = localPlayedGames.filter((item) => {
             return item.name !== name;
           });
@@ -180,7 +202,7 @@ function renderGameList(data) {
     gameContentRight.append(gameWishlist, gamePlayed);
 
     gameItem.append(gameImg, gameContentLeft, gameContentRight);
-    gameList.append(gameItem);
+    listContainer.append(gameItem);
   }
   gameData.forEach(gameCard);
 }
