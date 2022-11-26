@@ -205,18 +205,18 @@ section {
   border-radius: 23px;
 }
 
-#most-popular > h3 {
+section > h3 {
   color: var(--primary-color);
   font-size: clamp(1.4rem, 6.9vw, 2rem);
   margin-bottom: 30px;
 }
 
-#most-popular > h3 > span {
+section > h3 > span {
   color: var(--off-white);
   text-decoration: underline;
 }
 
-#game-list {
+.game-list {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
