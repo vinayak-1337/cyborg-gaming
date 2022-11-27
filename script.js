@@ -84,7 +84,7 @@ function createElementWithId(tagName, idName) {
   return element;
 }
 
-function updateWishlist() {
+function updateWishlistCount() {
   const wishlistCount = document.querySelector("#wishlist-count");
   const gameCount = document.querySelector("#game-count");
 
@@ -158,7 +158,7 @@ function renderGameList(data, listContainer) {
         localWishlist.push(game);
       }
       sessionStorage.setItem("wishlist", JSON.stringify(localWishlist));
-      updateWishlist();
+      updateWishlistCount();
     });
     gamePlayed.addEventListener("click", () => {
       const icon = gamePlayed.children[0];
@@ -190,7 +190,7 @@ function renderGameList(data, listContainer) {
         localPlayedGames.push(game);
       }
       sessionStorage.setItem("playedGames", JSON.stringify(localPlayedGames));
-      updateWishlist();
+      updateWishlistCount();
     });
 
     gameImg.setAttribute("src", background_image);
