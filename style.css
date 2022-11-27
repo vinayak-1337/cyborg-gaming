@@ -223,7 +223,6 @@ section > h3 > span {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: space-around;
 }
 
 .game-item {
@@ -290,7 +289,7 @@ footer {
   display: none;
 }
 
-#user-profile {
+.user-profile-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -411,7 +410,7 @@ footer {
   .banner__text {
     width: 100%;
   }
-  #user-profile {
+  .user-profile-container {
     flex-direction: column;
     width: fit-content;
     margin: 0 auto;
