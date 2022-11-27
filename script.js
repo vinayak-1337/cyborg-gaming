@@ -5,6 +5,7 @@ const popularList = document.querySelector("#popular-list");
 const homeTab = document.querySelector("#home-tab");
 const profileTab = document.querySelector("#profile-tab");
 const wishlist = document.querySelector("#wishlist");
+const gamingLibrary = document.querySelector("#game-played");
 
 let localWishlist = JSON.parse(sessionStorage.getItem("wishlist")) || [];
 let localPlayedGames = JSON.parse(sessionStorage.getItem("playedGames")) || [];
@@ -46,7 +47,10 @@ homeTab.addEventListener("click", (e) => openPage(e, "home-page"));
 profileTab.addEventListener("click", (e) => {
   openPage(e, "profile-page");
   wishlist.innerText = "";
+  gamingLibrary.innerText = "";
   renderGameList(localWishlist, wishlist);
+  renderGameList(localPlayedGames, gamingLibrary);
+  updateWishlistCount();
 });
 
 async function fetchGamesData() {
