@@ -22,7 +22,7 @@ mobileNavClose.addEventListener("click", () => {
   document.body.style.overflow = "auto";
 });
 
-if (window.innerWidth < 601) {
+if (window.innerWidth < 993) {
   headerRight.addEventListener("click", () => {
     headerRight.style.transform = "scaleX(0)";
     headerRight.style.transformOrigin = "right";
