@@ -72,6 +72,7 @@ img {
 /* Page Style */
 
 header {
+  position: sticky;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -79,6 +80,8 @@ header {
   min-height: 80px;
   margin: 0 auto;
   padding: 15px 0;
+  top: 0;
+  background-color: var(--very-dark-grey);
 }
 
 #header__left {
@@ -364,7 +367,7 @@ footer {
 
 @media screen and (max-width: 992px) {
   header {
-    position: relative;
+    position: sticky;
   }
   header > i {
     display: inline;
