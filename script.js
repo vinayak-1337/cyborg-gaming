@@ -10,6 +10,9 @@ const gamingLibrary = document.querySelector("#game-played");
 let localWishlist = JSON.parse(sessionStorage.getItem("wishlist")) || [];
 let localPlayedGames = JSON.parse(sessionStorage.getItem("playedGames")) || [];
 
+let localWishlist = JSON.parse(sessionStorage.getItem("wishlist")) || [];
+let localPlayedGames = JSON.parse(sessionStorage.getItem("gamePlayed")) || [];
+
 mobileNavOpen.addEventListener("click", () => {
   headerRight.style.transform = "scaleX(1)";
   headerRight.style.transformOrigin = "left";
@@ -195,6 +198,67 @@ function renderGameList(data, listContainer) {
       }
       sessionStorage.setItem("playedGames", JSON.stringify(localPlayedGames));
       updateWishlistCount();
+    });
+
+    gameWishlist.addEventListener("click", () => {
+      const icon = gameWishlist.children[0];
+      icon.classList.toggle("fa-regular");
+      icon.classList.toggle("fa-solid");
+      if (localWishlist.length) {
+        // check if wishlist include game
+        if (Array.from(icon.classList).includes("fa-regular")) {
+          const newLocalWishlist = localWishlist.filter((item) => {
+            return item.name !== name;
+          });
+          localWishlist = [...newLocalWishlist];
+        } else {
+          localWishlist.push({
+            name,
+            background_image,
+            genres,
+          });
+        }
+
+        sessionStorage.setItem("wishlist", JSON.stringify(localWishlist));
+      } else {
+        const game = {
+          name,
+          background_image,
+          genres,
+        };
+        localWishlist.push(game);
+        sessionStorage.setItem("wishlist", JSON.stringify(localWishlist));
+      }
+    });
+    gamePlayed.addEventListener("click", () => {
+      const icon = gamePlayed.children[0];
+      icon.classList.toggle("fa-regular");
+      icon.classList.toggle("fa-solid");
+      if (localPlayedGames.length) {
+        // check if game list include game
+        if (Array.from(icon.classList).includes("fa-regular")) {
+          const newLocalPlayedList = localPlayedGames.filter((item) => {
+            return item.name !== name;
+          });
+          localPlayedGames = [...newLocalPlayedList];
+        } else {
+          localPlayedGames.push({
+            name,
+            background_image,
+            genres,
+          });
+        }
+
+        sessionStorage.setItem("playedGames", JSON.stringify(localPlayedGames));
+      } else {
+        const game = {
+          name,
+          background_image,
+          genres,
+        };
+        localPlayedGames.push(game);
+        sessionStorage.setItem("playedGames", JSON.stringify(localPlayedGames));
+      }
     });
 
     gameImg.setAttribute("src", background_image);
