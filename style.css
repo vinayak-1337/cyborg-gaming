@@ -223,6 +223,7 @@ section > h3 > span {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  color: var(--off-white);
 }
 
 .game-item {

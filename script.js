@@ -11,9 +11,6 @@ const browseTab = document.querySelector("#browse-tab");
 let localWishlist = JSON.parse(sessionStorage.getItem("wishlist")) || [];
 let localPlayedGames = JSON.parse(sessionStorage.getItem("playedGames")) || [];
 
-let localWishlist = JSON.parse(sessionStorage.getItem("wishlist")) || [];
-let localPlayedGames = JSON.parse(sessionStorage.getItem("gamePlayed")) || [];
-
 mobileNavOpen.addEventListener("click", () => {
   headerRight.style.transform = "scaleX(1)";
   headerRight.style.transformOrigin = "left";
@@ -58,7 +55,11 @@ profileTab.addEventListener("click", (e) => {
   } else {
     renderGameList(localWishlist, wishlist);
   }
-  renderGameList(localPlayedGames, gamingLibrary);
+  if (!localPlayedGames.length) {
+    gamingLibrary.innerText = "No games right now";
+  } else {
+    renderGameList(localPlayedGames, gamingLibrary);
+  }
   updateWishlistCount();
 });
 
