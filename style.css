@@ -407,6 +407,9 @@ footer {
   .nav-link {
     font-size: 24px;
   }
+  #profile-tab {
+    display: none;
+  }
   .banner__text {
     width: 100%;
   }
