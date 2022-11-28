@@ -285,8 +285,13 @@ footer {
   padding: 20px 0;
 }
 
-#profile-page {
+#profile-page,
+#browse-page {
   display: none;
+}
+
+#game-library {
+  margin-top: 0;
 }
 
 .user-profile-container {
@@ -424,6 +429,9 @@ footer {
   }
   #user-stats {
     width: 100%;
+  }
+  .game-list {
+    justify-content: space-around;
   }
 }
 
