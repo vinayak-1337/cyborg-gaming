@@ -44,10 +44,7 @@ function openPage(e, page) {
   e.currentTarget.className += " active-nav";
 }
 
-homeTab.addEventListener("click", (e) => openPage(e, "home-page"));
-browseTab.addEventListener("click", (e) => openPage(e, "browse-page"));
-profileTab.addEventListener("click", (e) => {
-  openPage(e, "profile-page");
+function renderUserGameList() {
   wishlist.innerText = "";
   gamingLibrary.innerText = "";
   if (!localWishlist.length) {
@@ -61,6 +58,13 @@ profileTab.addEventListener("click", (e) => {
     renderGameList(localPlayedGames, gamingLibrary);
   }
   updateWishlistCount();
+}
+
+homeTab.addEventListener("click", (e) => openPage(e, "home-page"));
+browseTab.addEventListener("click", (e) => openPage(e, "browse-page"));
+profileTab.addEventListener("click", (e) => {
+  openPage(e, "profile-page");
+  renderUserGameList();
 });
 
 async function fetchGamesData(order = "", size = 8) {
@@ -108,8 +112,6 @@ function updateWishlistCount() {
 }
 
 function renderGameList(data, listContainer) {
-  const gameData = data;
-
   function gameCard({ name, background_image, genres }) {
     const gameItem = createElementWithClass("div", "game-item");
     const gameImg = document.createElement("img");
@@ -174,6 +176,7 @@ function renderGameList(data, listContainer) {
       }
       sessionStorage.setItem("wishlist", JSON.stringify(localWishlist));
       updateWishlistCount();
+      renderUserGameList();
     });
     gamePlayed.addEventListener("click", () => {
       const icon = gamePlayed.children[0];
@@ -206,6 +209,7 @@ function renderGameList(data, listContainer) {
       }
       sessionStorage.setItem("playedGames", JSON.stringify(localPlayedGames));
       updateWishlistCount();
+      renderUserGameList();
     });
 
     gameImg.setAttribute("src", background_image);
@@ -219,10 +223,8 @@ function renderGameList(data, listContainer) {
     gameItem.append(gameImg, gameContentLeft, gameContentRight);
     listContainer.append(gameItem);
   }
-  gameData.forEach(gameCard);
+  data.forEach(gameCard);
 }
-
-// fetchGamesData();
 
 (async function () {
   const mostPopularData = await fetchGamesData("-rating", 8);
