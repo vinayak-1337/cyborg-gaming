@@ -6,6 +6,7 @@ const homeTab = document.querySelector("#home-tab");
 const profileTab = document.querySelector("#profile-tab");
 const wishlist = document.querySelector("#wishlist");
 const gamingLibrary = document.querySelector("#game-played");
+const browseTab = document.querySelector("#browse-tab");
 
 let localWishlist = JSON.parse(sessionStorage.getItem("wishlist")) || [];
 let localPlayedGames = JSON.parse(sessionStorage.getItem("playedGames")) || [];
@@ -47,16 +48,21 @@ function openPage(e, page) {
 }
 
 homeTab.addEventListener("click", (e) => openPage(e, "home-page"));
+browseTab.addEventListener("click", (e) => openPage(e, "browse-page"));
 profileTab.addEventListener("click", (e) => {
   openPage(e, "profile-page");
   wishlist.innerText = "";
   gamingLibrary.innerText = "";
-  renderGameList(localWishlist, wishlist);
+  if (!localWishlist.length) {
+    wishlist.innerText = "No games right now";
+  } else {
+    renderGameList(localWishlist, wishlist);
+  }
   renderGameList(localPlayedGames, gamingLibrary);
   updateWishlistCount();
 });
 
-async function fetchGamesData() {
+async function fetchGamesData(order = "", size = 8) {
   const options = {
     method: "GET",
     headers: {
@@ -66,11 +72,12 @@ async function fetchGamesData() {
   };
   try {
     const response = await fetch(
-      "https://rawg-video-games-database.p.rapidapi.com/games?key=cf5e35876a3546608b18bd8bc95faa6a&page_size=40&ordering=-rating",
+      `https://rawg-video-games-database.p.rapidapi.com/games?key=cf5e35876a3546608b18bd8bc95faa6a&page_size=${size}&ordering=${order}`,
       options
     );
     const data = await response.json();
-    renderGameList(data.results, popularList);
+    // renderGameList(data.results, popularList);
+    return data.results;
   } catch (error) {
     console.log(error);
   }
@@ -100,7 +107,7 @@ function updateWishlistCount() {
 }
 
 function renderGameList(data, listContainer) {
-  const gameData = data.slice(0, 8);
+  const gameData = data;
 
   function gameCard({ name, background_image, genres }) {
     const gameItem = createElementWithClass("div", "game-item");
@@ -214,4 +221,12 @@ function renderGameList(data, listContainer) {
   gameData.forEach(gameCard);
 }
 
-fetchGamesData();
+// fetchGamesData();
+
+(async function () {
+  const mostPopularData = await fetchGamesData("-rating", 8);
+  renderGameList(mostPopularData, popularList);
+  const gameLibraryData = await fetchGamesData("", 40);
+  const gameLibraryContainer = document.querySelector("#game-library-list");
+  renderGameList(gameLibraryData, gameLibraryContainer);
+})();
